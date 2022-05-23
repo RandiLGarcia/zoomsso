@@ -1,0 +1,448 @@
+---
+title: "Zoom_MR_MLM"
+author: "Jessica pardim Araujo"
+date: "2/8/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(readr)
+library (rio)
+library(broom)
+library(car)
+library(lme4)
+library(lmerTest)
+premeasurescalescores <- read_csv("premeasurescalescores.csv")
+dailyscalescorespt1 <- read_csv("dailyscalescorespt1.csv")
+```
+
+
+```{r}
+
+zoom_premeasures %>%
+group_by(Race) %>% #do calculations by siteID
+summarize(total = n() / 56 *100 ) 
+
+
+favstats(zoom_premeasures$Age)
+
+qplot(zoom_premeasures$Race)
+
+
+```
+
+
+
+```{r}
+#daily_SSO log
+
+Zoom_daily$lg_daily_SSO <- log(Zoom_daily$daily_SSO+1)
+
+#Daily state self objectification - State self-esteem
+
+ ggplot(Zoom_daily, aes(lg_daily_SSO,SES_daily ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+ 
+ ggplot(Zoom_daily, aes(SES_daily))+
+   geom_histogram(bins = 15)
+ 
+  ggplot(Zoom_daily, aes(lg_daily_SSO))+
+   geom_histogram(bins = 15)
+ 
+#Regression
+
+SSO_SES<-lm(SES_daily~lg_daily_SSO, data=Zoom_daily)
+summary(SSO_SES)
+
+
+#residuals
+resid1 <- augment(SSO_SES)
+summary(resid1)
+
+ggplot(SSO_SES, aes(.resid))+ 
+  geom_histogram(bins=20)
+
+ggplot(SSO_SES, aes(.fitted, .resid))+ 
+  geom_point()
+
+
+#Zoom_daily$cent_SES_daily <- Zoom_daily$SES_daily-mean(Zoom_daily$SES_daily)
+
+ # ggplot(Zoom_daily, aes(daily_SSO,cent_SES_daily ))+
+ #   geom_point()+
+ #   geom_smooth(method = "lm")
+
+#Authenticity - State self-esteem
+
+ ggplot(Zoom_daily, aes(authenticity,SES_daily ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+ 
+ ggplot(Zoom_daily, aes(authenticity))+
+   geom_histogram(bins = 15)
+
+Auth_SES<-lm(SES_daily~authenticity, data=Zoom_daily)
+summary(Auth_SES)
+
+
+#Authenticity - State self-objectification
+
+ ggplot(Zoom_daily, aes(authenticity,lg_daily_SSO ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+ 
+  ggplot(Zoom_daily, aes(lg_daily_SSO))+
+   geom_histogram(bins = 15)
+
+Auth_SSO<-lm(authenticity~lg_daily_SSO, data=Zoom_daily)
+summary(Auth_SSO)
+
+#residuals
+resid1 <- augment(Auth_SES)
+summary(resid1)
+
+ggplot(Auth_SES, aes(.resid))+ 
+  geom_histogram(bins=20)
+
+ggplot(Auth_SES, aes(.fitted, .resid))+ 
+  geom_point()
+
+#Daily state self objectification - authenticity - State self-esteem
+
+sso_auth_ses<-lm(SES_daily~lg_daily_SSO + authenticity, data=Zoom_daily)
+
+summary(sso_auth_ses)
+```
+#holding authenticity to 0
+# affect of auth holding SSO at 0
+#rel. with sso and self est change depending in how much auth you're feeling 
+#take out non sign interaction, in this case is auth.
+
+```{r}
+#Mental Fatigue log
+
+#Zoom_daily$lg_Fatigue_daily <- log(Zoom_daily$Fatigue_daily+1)
+
+#Daily state self objectification - daily fatigue
+
+ ggplot(Zoom_daily, aes(daily_SSO,Fatigue_daily ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+ 
+ ggplot(Zoom_daily, aes(Fatigue_daily))+
+   geom_histogram(bins = 15)
+ 
+  ggplot(Zoom_daily, aes(lg_daily_SSO))+
+   geom_histogram(bins = 15)
+ 
+#Regression
+
+SSO_fatigue<-lm(Fatigue_daily~daily_SSO, data=Zoom_daily)
+summary(SSO_fatigue)
+
+
+#residuals
+resid7 <- augment(SSO_fatigue)
+summary(resid7)
+
+ggplot(SSO_fatigue, aes(.resid))+ 
+  geom_histogram(bins=20)
+
+ggplot(SSO_SES, aes(.fitted, .resid))+ 
+  geom_point()
+
+
+#Authenticity - Daily fatigue
+
+ ggplot(Zoom_daily, aes(authenticity,Fatigue_daily ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+ 
+ ggplot(Zoom_daily, aes(authenticity))+
+   geom_histogram(bins = 15)
+
+Auth_fatigue<-lm(Fatigue_daily~authenticity, data=Zoom_daily)
+summary(Auth_fatigue)
+
+
+#Daily state self objectification - authenticity - Daily fatigue
+
+sso_auth_fatigue<-lm(Fatigue_daily~lg_daily_SSO + authenticity, data=Zoom_daily)
+
+summary(sso_auth_fatigue)
+
+#Authenticity - Stroop
+
+Stroop_Auth<-lm(stroop~authenticity, data=Zoom_daily)
+summary(Stroop_Auth)
+
+
+ggplot(Zoom_daily, aes(authenticity,stroop ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+ 
+ ggplot(Zoom_daily, aes(stroop))+
+   geom_histogram(bins = 15)
+ 
+ #residuals
+resid2 <- augment(Stroop_Auth)
+summary(resid2)
+
+ggplot(Stroop_Auth, aes(.resid))+ 
+  geom_histogram(bins=10)
+
+ggplot(Stroop_Auth, aes(.fitted, .resid))+ 
+  geom_point()
+
+#Daily state self objectification - authenticity - Stroop
+
+sso_auth_stroop<-lm(stroop~daily_SSO + authenticity + daily_SSO*authenticity, data=Zoom_daily)
+
+summary(sso_auth_stroop)
+```
+
+```{r}
+
+#Daily state self objectification - How_today
+
+#daily SSO use log
+
+ggplot(Zoom_daily, aes(daily_SSO,How_Today ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+
+ ggplot(Zoom_daily, aes(How_Today))+
+   geom_histogram(bins = 15)
+
+SSO_HOW<-lm(How_Today~daily_SSO, data=Zoom_daily)
+summary(SSO_HOW)
+
+ #residuals
+resid3 <- augment(SSO_HOW)
+summary(resid3)
+
+ggplot(SSO_HOW, aes(.resid))+ 
+  geom_histogram(bins=10)
+
+ggplot(SSO_HOW, aes(.fitted, .resid))+ 
+  geom_point()
+
+#Authenticity - How_today
+ ggplot(Zoom_daily, aes(authenticity,How_Today ))+
+   geom_point()+
+geom_smooth(method = "lm")
+ ggplot(Zoom_daily, aes(authenticity))+
+ geom_histogram(bins = 10)
+ggplot(Zoom_daily, aes(How_Today))+
+   geom_histogram(bins = 7)
+
+Auth_HOW<-lm(How_Today~authenticity, data=Zoom_daily)
+summary(Auth_HOW)
+
+#Daily state self objectification - authenticity - How_today
+#remove Auth
+sso_auth_how<-lm(How_Today~daily_SSO + authenticity, data=Zoom_daily)
+
+summary(sso_auth_how)
+```
+
+
+```{r}
+#low R2, plot
+#Interaction Quality - Stroop
+
+ggplot(Zoom_daily, aes(interaction_neg,stroop ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+
+ ggplot(Zoom_daily, aes(interaction_neg))+
+   geom_histogram(bins = 15)
+ 
+ 
+ ggplot(Zoom_daily, aes(stroop))+
+   geom_histogram(bins = 15)
+
+
+inter_stroop<-lm(stroop~interaction_neg, data=Zoom_daily)
+summary(inter_stroop)
+
+plot(inter_stroop)
+
+#Daily state self objectification - Interaction Quality - Stroop
+
+sso_inte_stroop<-lm(stroop~daily_SSO + interaction_neg + daily_SSO*interaction_neg, data=Zoom_daily)
+
+summary(sso_inte_stroop)
+
+vif(sso_inte_stroop)
+
+
+
+
+```
+#removing outliers 
+
+
+
+
+
+
+
+  #removing 100
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-17.3620  -4.5972  -0.2154   2.9743  17.3221 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(>|t|)  
+(Intercept)                6.349098   2.711879   2.341   0.0205 *
+daily_SSO                 -0.557695   1.091671  -0.511   0.6102  
+interaction_neg           -0.002034   0.810943  -0.003   0.9980  
+daily_SSO:interaction_neg  0.180960   0.272905   0.663   0.5083  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+```{r}
+#Interaction Quality - SES
+
+ggplot(Zoom_daily, aes(interaction_neg,SES_daily ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+
+ ggplot(Zoom_daily, aes(interaction_neg))+
+   geom_histogram(bins = 15)
+
+inter_SES<-lm(SES_daily~interaction_neg, data=Zoom_daily)
+summary(inter_SES)
+
+#Daily state self objectification - Interaction Quality - SES
+#test for VIF
+
+sso_inte_SES<-lm(SES_daily~daily_SSO + interaction_neg + authenticity, data=Zoom_daily)
+
+summary(sso_inte_SES)
+
+#Test VIF
+
+vif_values <- vif(sso_inte_SES)
+
+#create horizontal bar chart to display each VIF value
+barplot(vif_values, main = "VIF Values", horiz = TRUE, col = "steelblue")+
+abline(v = 5, lwd = 3, lty = 2)
+
+
+```
+
+```{r}
+
+#Interaction Quality - How_Today
+
+ggplot(Zoom_daily, aes(interaction_neg,How_Today ))+
+   geom_point()+
+   geom_smooth(method = "lm")
+
+ ggplot(Zoom_daily, aes(How_Today))+
+   geom_histogram(bins = 6)
+
+inter_how<-lm(How_Today~interaction_neg, data=Zoom_daily)
+summary(inter_how)
+
+#Daily state self objectification - Interaction Quality - How_Today
+
+sso_inte_how<-lm(How_Today~daily_SSO + interaction_neg , data=Zoom_daily)
+
+summary(sso_inte_how)
+
+vif(sso_inte_how)
+
+```
+
+```{r}
+#Daily state self objectification - Interaction Quality - How_Today
+
+sso_inte_how<-lm(How_Today~daily_SSO + interaction_neg + daily_SSO*interaction_neg, data=Zoom_daily)
+
+summary(sso_inte_how)
+
+```
+
+```{r}
+#Join
+
+Zoom_join<-Zoom_daily %>% 
+  left_join(premeasurescalescores, by = "partID")
+
+Zoom_join<-Zoom_join %>% 
+  full_join(dailyscalescorespt1, by = "partID")
+
+#Changing date to 0-4
+
+Zoom_join<-Zoom_join %>% 
+  mutate(day = (day -1))
+  
+
+Zoom_join$day
+
+```
+
+# Multilevel Modeling 
+
+
+```{r}
+#MLM
+
+mlm_mod_int <- lmer(authenticity~Self_Obj +day
+                         + (1 + day|partID), 
+                         data = Zoom_join)
+summary(mlm_mod_int)
+plot(mlm_mod_int)
+confint(mlm_mod_int)
+
+
+mlm_mod_int2 <- lmer(Fatigue_daily~Self_Obj +day
+                         + (1 + day|partID), 
+                         data = Zoom_join)
+summary(mlm_mod_int2)
+
+mlm_mod_int3 <- lmer(How_Today~Self_Obj +day
+                         + (1 + day|partID), 
+                         data = Zoom_join)
+summary(mlm_mod_int3)
+
+mlm_mod_int4 <- lmer(interaction_neg~Self_Obj +day
+                         + (1 + day|partID), 
+                         data = Zoom_join)
+summary(mlm_mod_int4)
+
+mlm_mod_int5 <- lmer(stroop~Self_Obj +day
+                         + (1 + day|partID), 
+                         data = Zoom_join)
+summary(mlm_mod_int5)
+
+
+mlm_mod_int6 <- lmer(SES_daily~Self_Obj +day
+                         + (1 + day|partID), 
+                         data = Zoom_join)
+summary(mlm_mod_int6)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+

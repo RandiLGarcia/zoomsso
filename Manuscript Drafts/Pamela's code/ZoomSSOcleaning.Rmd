@@ -1,0 +1,221 @@
+---
+title: "Cleaning Zoom Data"
+author: "Pamela Kramer"
+date: "4/7/2022"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(mosaic)
+library(psych)
+library(readr)
+```
+
+```{r}
+zoom_premeasures<- read_csv("SS_ Zoom and Self-Objectification Premeasures_May 16, 2021_06.46.csv")
+```
+
+
+```{r}
+dailyzoom<- read_csv("SS_ Zoom and Self-Objectification Daily_May 16, 2021_06.45.csv")
+```
+# Trait Self-Objectification
+
+## Trait Self-Objectification Questionaire
+
+```{r}
+
+zoom_premeasures$ability <- rowMeans(select(zoom_premeasures,SOQ_1, SOQ_2, SOQ_4, SOQ_7, SOQ_9))
+zoom_premeasures$appearance <- rowMeans(select(zoom_premeasures,SOQ_3, SOQ_5, SOQ_6, SOQ_8, SOQ_10))
+```
+
+
+```{r}
+zoom_premeasures <- zoom_premeasures%>%
+  mutate(tso_mean = -1*(appearance - ability))
+
+favstats(zoom_premeasures$tso_mean)
+
+qplot(x=tso_mean, data=zoom_premeasures, bins=10)
+```
+
+#SPAS
+
+```{r}
+corr.test(select(zoom_premeasures, SPAS_1, SPAS_2, SPAS_3, SPAS_4, SPAS_5, SPAS_6, SPAS_7, SPAS_8, SPAS_9, SPAS_10, SPAS_11, SPAS_12))$r
+```
+SPAS negative
+SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12
+
+SPAS positive
+reverse score positive
+SPAS_1, SPAS_2, SPAS_5, SPAS_8, SPAS_11
+
+```{r}
+corr.test(select(zoom_premeasures,
+SPAS_1, SPAS_2, SPAS_5, SPAS_8, SPAS_11))$r
+```
+```{r}
+corr.test(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12 ))$r
+```
+```{r}
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( SPAS_1.r = (1 + 5) - SPAS_1)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( SPAS_2.r = (1 + 5) - SPAS_2)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( SPAS_5.r = (1 + 5) - SPAS_5)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( SPAS_8.r = (1 + 5) - SPAS_8)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( SPAS_11.r = (1 + 5) - SPAS_11)
+
+```
+
+```{r}
+corr.test(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12, SPAS_1.r, SPAS_2.r, SPAS_5.r, SPAS_8.r, SPAS_11.r ))$r
+```
+```{r}
+alpha(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12, SPAS_1.r, SPAS_2.r, SPAS_5.r, SPAS_8.r, SPAS_11.r  ))
+```
+
+```{r}
+zoom_premeasures$SPASscore<-rowMeans(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12, SPAS_1.r, SPAS_2.r, SPAS_5.r, SPAS_8.r, SPAS_11.r), na.rm = TRUE)
+
+favstats(zoom_premeasures$SPASscore)
+
+qplot(x=SPASscore, data=zoom_premeasures, bins=10)
+
+```
+
+#OBCS A: Surveillance
+
+```{r}
+
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( OBCS_1.r = (1+7) - OBCS_1)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( OBCS_2.r = (1+7) - OBCS_2)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( OBCS_3.r = (1+7) - OBCS_3)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( OBCS_4.r = (1+7) - OBCS_4)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( OBCS_7.r = (1+7) - OBCS_7)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate( OBCS_8.r = (1+7) - OBCS_8)
+```
+
+```{r}
+corr.test(select(zoom_premeasures ,OBCS_1.r, OBCS_2.r, OBCS_3.r, OBCS_4.r, OBCS_5, OBCS_6, OBCS_7.r, OBCS_8.r ))$r
+```
+```{r}
+alpha(select(zoom_premeasures ,OBCS_1.r, OBCS_2.r, OBCS_3.r, OBCS_4.r, OBCS_5, OBCS_6, OBCS_7.r, OBCS_8.r ))
+```
+
+```{r}
+zoom_premeasures$OBCS_a_sur<-rowMeans(select(zoom_premeasures,,OBCS_1.r, OBCS_2.r, OBCS_3.r, OBCS_4.r, OBCS_5, OBCS_6, OBCS_7.r, OBCS_8.r), na.rm = TRUE)
+
+favstats(zoom_premeasures$OBCS_a_sur)
+
+qplot(x=OBCS_a_sur, data=zoom_premeasures, bins=10)
+```
+
+
+
+#State Self-Objectification
+
+```{r}
+
+corr.test(select(dailyzoom, SSO_1, SSO_2, SSO_3))$r
+```
+
+```{r}
+alpha(select(dailyzoom, SSO_1, SSO_2, SSO_3))
+```
+
+```{r}
+dailyzoom$ssodaily<- rowMeans(select(dailyzoom, SSO_1, SSO_2, SSO_3), na.rm = TRUE)
+favstats(dailyzoom$ssodaily)
+
+qplot(x=ssodaily, data=dailyzoom, bins=10)
+
+```
+
+```{r}
+dailyzoom$logsso=log(dailyzoom$ssodaily)
+favstats(dailyzoom$logsso)
+
+qplot(x=logsso, data=dailyzoom, bins=8)
+```
+
+## Dichotimous SSO
+
+```{r}
+dailyzoom<- dailyzoom%>%
+  mutate(sso=ifelse(ssodaily==1.000000,0,1))
+  
+```
+
+#Authenticity
+
+```{r}
+
+corr.test(select(dailyzoom, SSO_4, SSO_5))$r
+```
+```{r}
+alpha(select(dailyzoom, SSO_4, SSO_5))
+```
+```{r}
+dailyzoom$authenticdaily<-rowMeans(select(dailyzoom, SSO_4, SSO_5), na.rm = TRUE)
+```
+
+#Positive Interaction Quality
+
+```{r}
+
+corr.test(select(dailyzoom, interact_comfort, interact_happy, interact_friendly, interact_warm, interact_easygoing, interact_sincere, interact_authentic, interact_cooperative))$r
+```
+```{r}
+alpha(select(dailyzoom, interact_comfort, interact_happy, interact_friendly, interact_warm, interact_easygoing, interact_sincere, interact_authentic, interact_cooperative))
+```
+```{r}
+dailyzoom$interactpos<- rowMeans(select(dailyzoom, interact_comfort, interact_happy, interact_friendly, interact_warm, interact_easygoing, interact_sincere, interact_authentic, interact_cooperative ), na.rm = TRUE)
+```
+
+#Negative Interaction Quality
+
+```{r}
+
+corr.test(select(dailyzoom, interact_anxious, interact_unhappy, interac_hostile, interact_apprehensiv, interact_aggresive))$r
+```
+
+```{r}
+alpha(select(dailyzoom, interact_anxious, interact_unhappy, interac_hostile, interact_apprehensiv, interact_aggresive))
+```
+
+```{r}
+dailyzoom$interactneg<- rowMeans(select(dailyzoom,  interact_anxious, interact_unhappy, interac_hostile, interact_apprehensiv, interact_aggresive ), na.rm = TRUE)
+```
+
+
+```{r}
+zoomstudyscorespre<- (select(zoom_premeasures, ResponseId, partID, tso_mean, SPASscore, OBCS_a_sur))
+```
+
+```{r}
+zoomstudyscoresdaily<- (select(dailyzoom,  ResponseId, partID, Zoom_Total_Mins, Self_View, Self_View_Mins, Self_Distraction, ssodaily, authenticdaily, interactpos, interactneg, day, sso))
+```
+
+
+```{r}
+tsosso<-merge(x=zoomstudyscorespre, y=zoomstudyscoresdaily, by="partID")
+```
+
+
+```{r}
+write_csv(x = tsosso, file = "duperscore.csv")
+```
+
+

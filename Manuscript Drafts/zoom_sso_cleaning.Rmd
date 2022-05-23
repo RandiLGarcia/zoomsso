@@ -1,0 +1,340 @@
+---
+title: "zoom_sso_cleaning"
+author: "Randi L. Garcia"
+date: "5/22/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+library(psych)
+```
+
+```{r}
+zoom_premeasures <- read_csv("../Data/raw data/SS: Zoom and Self-Objectification Premeasures_May 16, 2021_06.46.csv")
+zoom_daily <- read_csv("../Data/raw data/SS: Zoom and Self-Objectification Daily_May 16, 2021_06.45.csv")
+```
+
+```{r}
+names(zoom_daily)
+names(zoom_premeasures)
+```
+
+# Demographics
+
+```{r}
+zoom_premeasures <- zoom_premeasures %>%
+  select(Progress, ResponseId, Age:partID) 
+
+head(zoom_premeasures)
+table(zoom_premeasures$Gender) #What to do with nonbinary?
+```
+```{r}
+table(zoom_premeasures$Sexual_Orientation)
+table(zoom_premeasures$Race)
+table(zoom_premeasures$Political)
+```
+
+
+# Zoom Use
+
+## Weekly and Daily Zoom Use (premeasures)
+
+```{r}
+table(zoom_premeasures$Zoom_Use_Weekly)
+table(zoom_premeasures$Zoom_Use_Daily)
+```
+
+## Self-view and Image Distraction
+
+```{r}
+#1 is always hiding self-view and 5 is never. 5 means seeing oneself more.
+table(zoom_premeasures$Self_View_Daily)
+
+zoom_premeasures <- zoom_premeasures %>% 
+  mutate(Hide_Self_View = 6 - Self_View_Daily,
+         Self_View = Self_View_Daily) %>%
+  select(-Self_View_Daily)
+
+#In original: 1 is great deal distracted, 5 is not at all
+table(zoom_premeasures$Image_Distraction)
+
+zoom_premeasures <- zoom_premeasures %>% 
+  mutate(Image_Distraction = 6 - Image_Distraction) #reversing
+```
+
+
+# Trait Self-Objectification 
+
+## Self-Objectification Questionaire (SOQ)
+
+```{r}
+zoom_premeasures$ability <- rowMeans(select(zoom_premeasures,SOQ_1, SOQ_2, SOQ_4, SOQ_7, SOQ_9), na.rm = TRUE)
+zoom_premeasures$appearance <- rowMeans(select(zoom_premeasures,SOQ_3, SOQ_5, SOQ_6, SOQ_8, SOQ_10), na.rm = TRUE)
+```
+
+```{r}
+zoom_premeasures <- zoom_premeasures%>%
+  mutate(tso_mean = (ability - appearance))
+
+qplot(x=tso_mean, data=zoom_premeasures, bins=8)
+
+zoom_premeasures <- zoom_premeasures %>%
+  select(-(SOQ_1:SOQ_10))
+```
+
+## OBCS: Surveillance
+
+```{r}
+table(zoom_premeasures$OBCS_1)
+
+#reversing items (McKinley & Hyde)
+zoom_premeasures <- zoom_premeasures %>%
+  mutate(OBCS_1.r = (1+7) - OBCS_1,
+         OBCS_2.r = (1+7) - OBCS_2,
+         OBCS_3.r = (1+7) - OBCS_3,
+         OBCS_4.r = (1+7) - OBCS_4,
+         OBCS_7.r = (1+7) - OBCS_7,
+         OBCS_8.r = (1+7) - OBCS_8)
+```
+
+```{r}
+corr.test(select(zoom_premeasures, OBCS_1.r, OBCS_2.r, OBCS_3.r, OBCS_4.r, OBCS_5, OBCS_6, OBCS_7.r, OBCS_8.r))$r
+
+alpha(select(zoom_premeasures, OBCS_1.r, OBCS_2.r, OBCS_3.r, OBCS_4.r, OBCS_5, OBCS_6, OBCS_7.r, OBCS_8.r))
+```
+
+```{r}
+zoom_premeasures$OBCS_sur <- rowMeans(select(zoom_premeasures, OBCS_1.r, OBCS_2.r, OBCS_3.r, OBCS_4.r, 
+                                             OBCS_5, OBCS_6, OBCS_7.r, OBCS_8.r), na.rm = TRUE)
+
+qplot(x=OBCS_sur, data=zoom_premeasures, bins=10)
+
+names(zoom_premeasures)
+zoom_premeasures <- zoom_premeasures %>%
+  select(-(OBCS_1:OBCS_24), -OBCS_1.r, -OBCS_2.r, -OBCS_3.r, -OBCS_4.r, -OBCS_7.r, -OBCS_8.r)
+```
+
+## Social Physique Anxiety Scale
+
+```{r}
+#reversing
+zoom_premeasures <- zoom_premeasures %>%
+  mutate(SPAS_1.r = (1 + 5) - SPAS_1,
+         SPAS_2.r = (1 + 5) - SPAS_2,
+         SPAS_5.r = (1 + 5) - SPAS_5,
+         SPAS_8.r = (1 + 5) - SPAS_8,
+         SPAS_11.r = (1 + 5) - SPAS_11)
+```
+
+```{r}
+corr.test(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12, 
+                 SPAS_1.r, SPAS_2.r, SPAS_5.r, SPAS_8.r, SPAS_11.r ))$r
+
+alpha(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, SPAS_10, SPAS_12, 
+             SPAS_1.r, SPAS_2.r, SPAS_5.r, SPAS_8.r, SPAS_11.r  ))
+```
+
+```{r}
+zoom_premeasures$SPA <- rowMeans(select(zoom_premeasures, SPAS_3, SPAS_4, SPAS_6, SPAS_7, SPAS_9, 
+                                            SPAS_10, SPAS_12, SPAS_1.r, SPAS_2.r, SPAS_5.r, 
+                                        SPAS_8.r, SPAS_11.r), na.rm = TRUE)
+
+qplot(x=SPA, data=zoom_premeasures, bins=8)
+
+zoom_premeasures <- zoom_premeasures %>%
+  select(-SPAS_3, -SPAS_4, -SPAS_6, -SPAS_7, -SPAS_9, -SPAS_10, -SPAS_12, 
+         -SPAS_1.r, -SPAS_2.r, -SPAS_5.r, -SPAS_8.r, -SPAS_11.r,
+         -SPAS_1, -SPAS_2, -SPAS_5, -SPAS_8, -SPAS_11)
+```
+
+# Dialy Measures
+
+```{r}
+zoom_daily <- zoom_daily %>%
+  select(Progress, ResponseId, `StroopTime_Congrue_First Click`:partID)
+```
+
+
+## Stroop Test - cognitive fatigue
+
+```{r}
+zoom_daily <- zoom_daily %>% 
+  mutate(stroop_fatigue = `StroopTime_Incongru_Page Submit` - `StroopTime_Congrue_Page Submit`)
+
+qplot(y=stroop_fatigue, x = Self_View, data=zoom_daily)
+
+#remove greater than 100 or less than -100
+zoom_daily <- zoom_daily %>% 
+  mutate(stroop_fatigue = ifelse(stroop_fatigue <= 100 & stroop_fatigue >= -100, stroop_fatigue, NA))
+
+qplot(y=stroop_fatigue, x = Self_View, data=zoom_daily)
+```
+
+## Zoom Use and Self-view Distraction
+
+```{r}
+table(zoom_daily$Zoom_Total_Mins) #what to do with days with NO zoom use?
+table(zoom_daily$Self_View) #1 always use hide-self-view, 5 never used it
+
+zoom_daily <- zoom_daily %>%
+  mutate(Hide_Self_View_Today = 6 - Self_View,
+         Self_View_Today = Self_View) %>%
+  select(-Self_View)
+
+table(zoom_daily$Self_View_Mins) #cleaning needed
+800/60 #13 hours?? Does not correspond with Zoom minutes today
+```
+
+```{r}
+zoom_daily <- zoom_daily %>%
+  mutate(Self_Distraction_Today = 6 - Self_Distraction) %>%
+  select(-Self_Distraction)
+```
+
+
+## Explicit Mental Fatigue
+
+```{r}
+corr.test(select(zoom_daily, Mental_Fatigue, ConcentrateDifficult, Memory_Problems, 
+                 Slowness_of_Thinking, Sensitivity_to_Stres, Irritability))$r
+
+alpha(select(zoom_daily, Mental_Fatigue, ConcentrateDifficult, Memory_Problems, 
+                 Slowness_of_Thinking, Sensitivity_to_Stres, Irritability))  
+```
+
+
+```{r}
+zoom_daily$Mental_Fatigue_Daily <- rowMeans(select(zoom_daily, Mental_Fatigue, ConcentrateDifficult, 
+                                                   Memory_Problems, Slowness_of_Thinking, 
+                                                   Sensitivity_to_Stres, Irritability), na.rm = TRUE)
+
+qplot(x = Mental_Fatigue_Daily, data = zoom_daily, bins = 8)
+```
+
+## Explicit Physical Fatigue 
+
+there is only one variable for physical fatigue, and it is on Mental fatique Scale block
+
+```{r}
+table(zoom_daily$Fatigue)
+```
+
+
+## Daily SSO (state self-obejtification)
+
+```{r}
+corr.test(select(zoom_daily, SSO_1, SSO_2, SSO_3))$r
+
+alpha(select(zoom_daily, SSO_1, SSO_2, SSO_3))
+
+zoom_daily$daily_SSO <- rowMeans(select(zoom_daily, SSO_1, SSO_2, SSO_3), na.rm = TRUE)
+
+qplot(x = daily_SSO, data = zoom_daily, bins = 10)
+table(zoom_daily$daily_SSO)
+
+#Dichotomous
+zoom_daily <- zoom_daily %>% 
+  mutate(daily_SSO_binary = ifelse(daily_SSO == 1, 0, 1))
+
+table(zoom_daily$daily_SSO_binary)
+```
+
+## Authenticity 
+
+```{r}
+corr.test(select(zoom_daily, SSO_4, SSO_5))$r
+
+zoom_daily$authenticity <- rowMeans(select(zoom_daily, SSO_4, SSO_5), na.rm = TRUE)
+
+qplot(x = authenticity, data = zoom_daily, bins = 8)
+```
+
+## Interaction Quality (reversed happy feelings)
+
+```{r}
+zoom_daily <- zoom_daily %>%
+  mutate(interact_anxious.r = 8 - interact_anxious,
+         interact_unhappy.r = 8 - interact_unhappy,
+         interact_hostile.r = 8 - interac_hostile,
+         interact_apprehensiv.r = 8 - interact_apprehensiv,
+         interact_aggressive.r = 8 - interact_aggresive) 
+
+  
+corr.test(select(zoom_daily, interact_comfort, interact_anxious.r, interact_happy, interact_unhappy.r, 
+                 interact_friendly, interact_warm, interact_easygoing, interact_hostile.r, 
+                 interact_sincere, interact_authentic, interact_apprehensiv.r, interact_cooperative, 
+                 interact_aggressive.r))$r
+
+alpha(select(zoom_daily, interact_comfort, interact_anxious.r, interact_happy, interact_unhappy.r, 
+                 interact_friendly, interact_warm, interact_easygoing, interact_hostile.r, 
+                 interact_sincere, interact_authentic, interact_apprehensiv.r, interact_cooperative, 
+                 interact_aggressive.r))
+
+zoom_daily$interact_qual <- rowMeans(select(zoom_daily, interact_comfort, interact_anxious.r, 
+                                              interact_happy, interact_unhappy.r, interact_friendly, 
+                                              interact_warm, interact_easygoing, interact_hostile.r, 
+                                              interact_sincere, interact_authentic, interact_apprehensiv.r,
+                                              interact_cooperative, interact_aggressive.r), na.rm = TRUE)
+
+qplot(x = interact_qual, data = zoom_daily, bins = 10)
+
+zoom_daily <- zoom_daily %>%
+  select(-(interact_comfort:interact_aggresive), -(interact_anxious.r:interact_aggressive.r))
+```
+
+
+# Daily Well Being 
+
+## Well-being
+
+```{r}
+table(zoom_daily$How_Today)
+```
+
+## State Self-esteem (should separate positive and negative?)
+
+```{r}
+#I need to reverse the POSITIVE to get more self-esteem because 1 is strongly agree and 4 was strongly disagree. :(
+zoom_daily <- zoom_daily %>%
+  mutate(SES_Satisfied.r = 5 - SES_Satisfied, 
+         SES_Good.r = 5 -  SES_Good,
+         SES_Competent.r = 5 - SES_Competent, 
+         SES_Worth.r = 5 - SES_Worth, 
+         SES_Positive.r = 5 - SES_Positive)
+
+corr.test(select(zoom_daily, SES_Satisfied.r, SES_Bad, SES_Good.r,
+                 SES_Competent.r, SES_Proud, SES_Useless,
+                 SES_Worth.r, SES_Respect, SES_Failure, SES_Positive.r))$r
+
+alpha(select(zoom_daily, SES_Satisfied.r, SES_Bad, SES_Good.r,
+                 SES_Competent.r, SES_Proud, SES_Useless,
+                 SES_Worth.r, SES_Respect, SES_Failure, SES_Positive.r))
+
+zoom_daily$SES_daily <- rowMeans(select(zoom_daily, SES_Satisfied.r, SES_Bad, SES_Good.r,
+                 SES_Competent.r, SES_Proud, SES_Useless,
+                 SES_Worth.r, SES_Respect, SES_Failure, SES_Positive.r), na.rm = TRUE)
+
+qplot(x = SES_daily, data = zoom_daily, bins = 12)
+
+names(zoom_daily)
+zoom_daily <- zoom_daily %>%
+  select(-(SES_Satisfied:SES_Positive), -(SES_Satisfied.r:SES_Positive.r))
+```
+
+# Joining datasets
+
+```{r}
+zoom_clean = right_join(zoom_premeasures, zoom_daily, by = "partID", keep = TRUE) %>%
+  mutate(partID = partID.x) %>% select(-partID.y, -partID.x) %>%
+  select(ResponseId.y, partID, day, Age:SES_daily)
+
+names(zoom_clean)
+glimpse(zoom_clean)
+```
+
+```{r}
+write.csv(zoom_clean, "zoom_clean.csv")
+```
+

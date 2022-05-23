@@ -1,0 +1,136 @@
+---
+title: "Logistic Regression Model"
+author: "Pamela Kramer"
+date: "3/23/2022"
+output: pdf_document
+---
+
+
+```{r}
+library(dplyr)
+library(mosaic)
+library(psych)
+library(Stat2Data)
+```
+
+```{r}
+library(readr)
+zoomscores <- read_csv("duperscore.csv")
+```
+
+
+
+# Simple Logistic Regression Models
+
+*continuous minues variables need to be divided into intervals
+```{r}
+ssoxzoom<-glm(sso~Zoom_Total_Mins,family=binomial, data=zoomscore)
+
+summary(ssoxzoom)
+emplogitplot1(sso~Zoom_Total_Mins, data=zoomscore, ngroups="all")
+```
+intercept is the value of log sso? if it equals zero
+
+zoom intercept is how much log sso? goes up exponentially by e 
+
+
+
+
+```{r}
+ssoxselfhide<-glm(sso~Self_View,family=binomial, data=zoomscore)
+
+summary(ssoxselfhide)
+emplogitplot1(sso~Self_View, data=zoomscore, ngroups="all")
+```
+
+```{r}
+ssoxselfmins<-glm(sso~Self_View_Mins,family=binomial, data=zoomscore)
+
+summary(ssoxselfmins)
+emplogitplot1(sso~Self_View_Mins, data=zoomscore, ngroups="all")
+```
+
+```{r}
+ssoxselfdistraction<-glm(sso~Self_Distraction,family=binomial, data=zoomscore)
+
+summary(ssoxselfdistraction)
+emplogitplot1(sso~Self_Distraction, data=zoomscore, ngroups="all")
+```
+
+# Multiple Logistic Regression using TSO/SPAS
+
+
+```{r}
+ssoxtsoxzoom<-glm(sso~Zoom_Total_Mins+tso_mean+Zoom_Total_Mins*tsomean,family=binomial, data=zoomscore)
+
+summary(ssoxtsoxzoom)
+```
+
+```{r}
+ssoxtsoxselfhide<-glm(sso~Self_View+tso_mean+Self_View*tso_mean,family=binomial, data=zoomscore)
+
+summary(ssoxtsoxselfhide)
+```
+```{r}
+ssoxtsoxselfhide2<-glm(sso~Self_View+tso_mean,family=binomial, data=zoomscore)
+
+summary(ssoxtsoxselfhide2)
+```
+```{r}
+ssoxtsoxselfmin<-glm(sso~Self_View_Mins+tso_mean+Self_View_Mins*tso_mean,family=binomial, data=zoomscore)
+
+summary(ssoxtsoxselfmin)
+```
+```{r}
+ssoxtsoxselfmin2<-glm(sso~Self_View_Mins+tso_mean,family=binomial, data=zoomscore)
+
+summary(ssoxtsoxselfmin2)
+```
+```{r}
+ssoxtsoxselfdis<-glm(sso~Self_Distraction+tso_mean+Self_Distraction*tso_mean,family=binomial, data=zoomscore)
+
+summary(ssoxtsoxselfdis)
+```
+# Multiple Logistic Regression with SPAS
+
+
+```{r}
+ssoxspasxzoom<-glm(sso~Zoom_Total_Mins+SPASscore+Zoom_Total_Mins*SPASscore,family=binomial, data=zoomscore)
+
+summary(ssoxspasxzoom)
+```
+
+
+
+```{r}
+ssoxspasxselfhide<-glm(sso~Self_View+SPASscore+Self_View*SPASscore,family=binomial, data=zoomscore)
+
+summary(ssoxspasxselfhide)
+```
+
+```{r}
+ssoxspasxselfhide2<-glm(sso~Self_View+SPASscore,family=binomial, data=zoomscore)
+
+summary(ssoxspasxselfhide2)
+```
+
+
+
+```{r}
+ssoxspasxselfmin<-glm(sso~Self_View_Mins+SPASscore+Self_View_Mins*SPASscore,family=binomial, data=zoomscore)
+
+summary(ssoxspasxselfmin)
+```
+
+```{r}
+ssoxspasxselfmin2<-glm(sso~Self_View_Mins+SPASscore,family=binomial, data=zoomscore)
+
+summary(ssoxspasxselfmin2)
+```
+
+
+```{r}
+ssoxspasxselfdis<-glm(sso~Self_Distraction+SPASscore+Self_Distraction*SPASscore,family=binomial, data=zoomscore)
+
+summary(ssoxspasxselfdis)
+```

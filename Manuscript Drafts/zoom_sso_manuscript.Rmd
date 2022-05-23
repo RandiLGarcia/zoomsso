@@ -1,0 +1,238 @@
+---
+title             : "The Effects of Zoom Self-View Distraction on Daily Self-Objectification and Well-Being"
+shorttitle        : "Zoom and Self-Obejctification"
+
+author: 
+  - name          : "Randi L. Garcia"
+    affiliation   : "1,2"
+    corresponding : yes    # Define only one corresponding author
+    address       : "College Lane, Smith College, Northampton, MA 01063"
+    email         : "rgarcia@smith.edu"
+    role:         
+      - "Conceptualization"
+      - "Methodology"          
+      - "Formal Analysis"
+      - "Writing - Original Draft Preparation"
+      - "Writing - Review & Editing"
+      - "Supervision"      
+  - name          : "Jessica Pardim Araujo"
+    affiliation   : "1"
+    role:
+      - "Writing - Original Draft Preparation"
+      - "Formal Analysis"
+      - "Writing - Review & Editing"
+  - name          : "Pamala Kramer"
+    affiliation   : "1"
+    role:
+      - "Formal Analysis"
+      - "Writing - Review & Editing"  
+  - name          : "Sarah Bingham"
+    affiliation   : "1"
+    role:
+      - "Conceptualization"
+      - "Methodology"        
+
+affiliation:
+  - id            : "1"
+    institution   : "Psychology Department, Smith College"
+  - id            : "2"
+    institution   : "Program in Statistical and Data Sciences, Smith College"
+
+authornote: |
+  Smith College, Psychology Department, Smith College, Program in Statistical and Data Sciences.
+
+abstract: |
+  This study investigtaed the effects of using Zoom, specifically seeing oneself on Zoom on mental fatigue and general well-being. 
+  
+keywords          : "keywords"
+wordcount         : "Zoom, self-objectification, computer mediated communication, authenticity"
+
+bibliography      : ["r-references.bib", "psy-references.bib"]
+
+floatsintext      : no
+linenumbers       : no
+draft             : no
+mask              : no
+
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library(papaja)
+library(readr)
+library(tidyverse)
+library(psych)
+library(nlme)
+library(lme4)
+library(lmerTest)
+r_refs("r-references.bib")
+```
+
+Past studies have found that using Zoom can cause mental fatigue [@bailenson2021nonverbal]. Seeing oneself on Zoom has also been linked to appearance concerns [@pfund2020video].
+
+# Methods
+
+## Participants
+
+## Measures
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+```{r}
+zoom_clean <- read_csv("zoom_clean.csv")
+#names(zoom_clean)
+```
+
+## Zoom Use and State Self-Objectification
+
+```{r}
+corr.test(select(zoom_clean, daily_SSO, daily_SSO_binary, tso_mean, OBCS_sur, SPA, Zoom_Total_Mins, Zoom_Use_Weekly, Zoom_Use_Daily, Hide_Self_View, Image_Distraction, Hide_Self_View_Today, Self_Distraction_Today))$r
+```
+
+```{r}
+glmer_ssozoom <- glmer(daily_SSO_binary ~ day + Zoom_Total_Mins + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssozoom)
+#confint(glmer_ssozoom)
+
+#### TRYING LMER MODELS WITH daily_SSO even though assumptions of normality are violated
+mlm_mod_int <- lmer(daily_SSO ~ day + Zoom_Total_Mins + (1|partID), data = zoom_clean)
+summary(mlm_mod_int)
+mlm_mod_int <- lmer(daily_SSO ~ day + Hide_Self_View_Today + Self_Distraction_Today + (1|partID), data = zoom_clean)
+summary(mlm_mod_int)
+plot(mlm_mod_int)
+```
+
+```{r}
+# Zoom_Total_Mins
+# Self_View_Mins
+# Hide_Self_View_Today
+# Self_View_Today
+# Self_Distraction_Today
+
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today 
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssohide)
+```
+
+Interaction with TSO 
+
+```{r}
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today*OBCS_sur + Self_Distraction_Today*OBCS_sur 
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssohide)
+
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today + OBCS_sur
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssohide)
+```
+
+```{r}
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today*tso_mean + Self_Distraction_Today*tso_mean 
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssohide)
+
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today + tso_mean
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssohide)
+```
+
+```{r}
+#does not converge with BOTH interactions in the model
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today*SPA
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+
+summary(glmer_ssohide)
+
+glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today + SPA
+                       + (1|partID), 
+                    family=binomial, 
+                    data = zoom_clean)
+
+summary(glmer_ssohide)
+```
+
+## Daliy State Self-Objectification and Outcomes
+
+```{r}
+corr.test(select(zoom_clean, daily_SSO, daily_SSO_binary, stroop_fatigue, How_Today, 
+                 Mental_Fatigue_Daily, authenticity, interact_qual, SES_daily))$r
+```
+
+State Self-Objectification to authenticity and interaction quality. 
+
+```{r}
+mlm_mod_int <- lmer(authenticity ~ daily_SSO + day
+                         + (1|partID), 
+                         data = zoom_clean)
+summary(mlm_mod_int)
+plot(mlm_mod_int)
+#confint(mlm_mod_int)
+
+mlm_mod_int <- lmer(interact_qual ~ daily_SSO + day
+                         + (1|partID), 
+                         data = zoom_clean)
+summary(mlm_mod_int)
+```
+
+Interaction quality (and SSO) and Well-Being
+
+```{r}
+mlm_mod_int <- lmer(stroop_fatigue ~ authenticity + daily_SSO + day + (1|partID), data = zoom_clean)
+mlm_mod_int <- lmer(stroop_fatigue ~ interact_qual + daily_SSO + day + (1|partID), data = zoom_clean)
+summary(mlm_mod_int)
+
+mlm_mod_int <- lmer(How_Today ~ authenticity + daily_SSO + day + (1|partID), data = zoom_clean)
+mlm_mod_int <- lmer(How_Today ~ interact_qual + daily_SSO + day + (1|partID), data = zoom_clean)
+summary(mlm_mod_int)
+
+mlm_mod_int <- lmer(Mental_Fatigue_Daily ~ authenticity + daily_SSO + day + (1|partID), data = zoom_clean)
+mlm_mod_int <- lmer(Mental_Fatigue_Daily ~ interact_qual + daily_SSO + day + (1|partID), data = zoom_clean)
+summary(mlm_mod_int)
+
+mlm_mod_int <- lmer(SES_daily ~ authenticity + daily_SSO + day + (1|partID), data = zoom_clean)
+mlm_mod_int <- lmer(SES_daily ~ interact_qual + daily_SSO + day + (1|partID), data = zoom_clean)
+summary(mlm_mod_int)
+```
+
+
+# Discussion
+
+
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::

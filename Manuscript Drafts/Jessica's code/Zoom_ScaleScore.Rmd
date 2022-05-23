@@ -1,0 +1,197 @@
+---
+title: "Scale Score"
+author: "Jessica pardim Araujo"
+date: "2/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library (tidyverse)
+library (psych)
+library (readr)
+library (mosaic)
+zoom_premeasures <- read_csv("Zoom and Self-Objectification Premeasures.csv")
+Zoom_daily <- read_csv("Zoom and Self-Objectification Daily.csv")
+dailyscalescorespt1 <- read_csv("dailyscalescorespt1.csv")
+premeasurescalescores <- read_csv ("premeasurescalescores.csv")
+
+```
+
+## Authenticity 
+
+```{r}
+
+corr.test(select(Zoom_daily, SSO_4, SSO_5))$r
+
+alpha(select(Zoom_daily, SSO_4, SSO_5))
+
+Zoom_daily$authenticity <- rowMeans(select(Zoom_daily, SSO_4, SSO_5), na.rm = TRUE)
+
+favstats(Zoom_daily$authenticity)
+
+qplot(x = authenticity, data = Zoom_daily, bins = 8)
+
+```
+
+## Interaction Quality (reversed happy feelings)
+
+```{r}
+  
+corr.test(select(Zoom_daily,interact_comfort,interact_anxious,interact_happy,interact_unhappy, interact_friendly,interact_warm,interact_easygoing,interac_hostile,interact_sincere,interact_authentic,interact_apprehensiv,interact_cooperative,interact_aggresive ))$r
+
+Zoom_daily <- Zoom_daily %>%
+  mutate(interact.r_comfort = (1 + 7) - interact_comfort) %>% 
+  mutate(interact.r_happy = (1 + 7) - interact_happy) %>% 
+  mutate(interact.r_friendly = (1 + 7) - interact_friendly) %>% 
+  mutate(interact.r_warm = (1 + 7) - interact_warm) %>%
+  mutate(interact.r_easygoing = (1 + 7) - interact_easygoing) %>% 
+  mutate(interact.r_sincere = (1 + 7) - interact_sincere) %>%  
+  mutate(interact.r_authentic = (1 + 7) - interact_authentic) %>% 
+  mutate(interact.r_cooperative = (1 + 7) - interact_cooperative) 
+```
+
+#interact_neg
+```{r}
+corr.test(select(Zoom_daily,interact.r_comfort,interact_anxious,interact.r_happy,interact_unhappy, interact.r_friendly,interact.r_warm,interact.r_easygoing,interac_hostile,interact.r_sincere,interact.r_authentic,interact_apprehensiv,interact.r_cooperative,interact_aggresive))$r
+
+alpha(select(Zoom_daily,interact.r_comfort,interact_anxious,interact.r_happy,interact_unhappy, interact.r_friendly,interact.r_warm,interact.r_easygoing,interac_hostile,interact.r_sincere,interact.r_authentic,interact_apprehensiv,interact.r_cooperative,interact_aggresive))
+
+Zoom_daily$interaction_neg <- rowMeans(select(Zoom_daily,interact.r_comfort,interact_anxious,interact.r_happy,interact_unhappy, interact.r_friendly,interact.r_warm,interact.r_easygoing,interac_hostile,interact.r_sincere,interact.r_authentic,interact_apprehensiv,interact.r_cooperative,interact_aggresive), na.rm = TRUE)
+
+favstats(Zoom_daily$interaction_neg)
+
+qplot(x = interaction_neg, data = Zoom_daily, bins = 10)
+```
+
+
+## Daily SSO (state of self-obejtification)
+
+```{r}
+
+corr.test(select(Zoom_daily, SSO_1, SSO_2, SSO_3))$r
+
+alpha(select(Zoom_daily, SSO_1, SSO_2, SSO_3))
+
+Zoom_daily$daily_SSO <- rowMeans(select(Zoom_daily, SSO_1, SSO_2, SSO_3), na.rm = TRUE)
+
+favstats(Zoom_daily$daily_SSO)
+
+qplot(x = daily_SSO, data = Zoom_daily, bins = 10)
+
+Zoom_daily <- Zoom_daily %>% 
+  mutate(Self_Obj = ifelse(daily_SSO == 1, 0, 1))
+
+Zoom_daily$Self_Obj
+
+```
+
+# Stroop Daily Mental Fatigue 
+
+## Stroop Test
+# stroop is teh measure of cogn fatigue
+
+```{r}
+
+glimpse (Zoom_daily)
+
+Zoom_daily <- Zoom_daily %>% 
+  mutate(stroop = `StroopTime_Incongru_Page Submit` - `StroopTime_Congrue_Page Submit`)
+
+#remove greater than 100 or less than -100
+Zoom_daily <- Zoom_daily %>% 
+  filter (stroop <= 40) %>% 
+  filter (stroop >= -100)
+
+ggplot (Zoom_daily, aes(stroop)) + 
+  geom_boxplot()
+
+```
+
+
+#Daily Well Being 
+
+## State Self-esteem (should separate positive and negative?)
+
+```{r}
+corr.test(select(Zoom_daily,SES_Satisfied,SES_Bad,SES_Good,SES_Competent,SES_Proud,SES_Useless,SES_Worth,SES_Respect,SES_Failure,SES_Positive))$r
+
+##reverse negative ones 
+
+Zoom_daily <- Zoom_daily %>%
+  mutate(SES.r_Satisfied = (1 + 4) - SES_Satisfied) %>% 
+  mutate(SES.r_Good = (1 + 4) - SES_Good) %>% 
+  mutate(SES.r_Competent = (1 + 4) - SES_Competent) %>% 
+  mutate(SES.r_Worth = (1 + 4) - SES_Worth) %>%
+  mutate(SES.r_Positive = (1 + 4) - SES_Positive)
+```
+
+```{r}
+corr.test(select(Zoom_daily,How_Today,SES.r_Satisfied,SES_Bad,SES.r_Good,SES.r_Competent,SES_Proud,SES_Useless,SES.r_Worth,SES_Respect,SES_Failure,SES.r_Positive))$r
+
+alpha(select(Zoom_daily,SES.r_Satisfied,SES_Bad,SES.r_Good,SES.r_Competent,SES_Proud,SES_Useless,SES.r_Worth,SES_Respect,SES_Failure,SES.r_Positive))
+
+Zoom_daily$SES_daily <- rowMeans(select(Zoom_daily,SES.r_Satisfied,SES_Bad,SES.r_Good,SES.r_Competent,SES_Proud,SES_Useless,SES.r_Worth,SES_Respect,SES_Failure,SES.r_Positive), na.rm = TRUE)
+
+favstats(Zoom_daily$SES_daily)
+
+qplot(x = SES_daily, data = Zoom_daily, bins = 12)
+```
+
+## How was today? (How to score one variable?)
+
+# do nothing 
+```{r}
+
+favstats(Zoom_daily$howtoday_score)
+
+qplot(x = How_Today, data = Zoom_daily, bins = 5.5)
+
+Zoom_daily$How_Today
+
+```
+
+
+## Mental Fatigue
+
+
+```{r}
+
+Zoom_daily <- Zoom_daily %>% 
+  mutate(Mental_Fatigue = (Mental_Fatigue -1)/2) %>% 
+  mutate(ConcentrateDifficult = (ConcentrateDifficult -1)/2) %>% 
+  mutate(Memory_Problems = (Memory_Problems -1)/2) %>% 
+  mutate(Slowness_of_Thinking = (Slowness_of_Thinking -1)/2) %>% 
+  mutate(Sensitivity_to_Stres = (Sensitivity_to_Stres -1)/2) %>% 
+  mutate(Irritability = (Irritability -1)/2)
+
+corr.test(select(Zoom_daily, Mental_Fatigue, ConcentrateDifficult, Memory_Problems, Slowness_of_Thinking, Sensitivity_to_Stres, Irritability))$r
+  
+
+grep("Irritability", colnames(Zoom_daily))
+
+33- 38
+
+```
+
+
+```{r}
+alpha(select(Zoom_daily, Mental_Fatigue, ConcentrateDifficult, Memory_Problems, Slowness_of_Thinking, Sensitivity_to_Stres, Irritability))
+
+Zoom_daily$Fatigue_daily <- rowMeans(select(Zoom_daily, Mental_Fatigue, ConcentrateDifficult, Memory_Problems, Slowness_of_Thinking, Sensitivity_to_Stres, Irritability), na.rm = TRUE)
+
+favstats(Zoom_daily$Fatigue_daily)
+
+qplot(x = Fatigue_daily, data = Zoom_daily, bins = 12)
+```
+
+
+
+
+## Physical Fatigue (there is only one variable for physical fatigue, and it is on Mental fatique Scale block )
+
+
+

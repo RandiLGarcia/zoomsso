@@ -1,0 +1,109 @@
+---
+title: "mlmsso"
+author: "Pamela Kramer"
+date: "3/31/2022"
+output: pdf_document
+---
+
+```{r}
+library(dplyr)
+library(mosaic)
+library(psych)
+library(Stat2Data)
+library(lme4)
+library(lmerTest)
+```
+
+
+```{r}
+library(readr)
+zoomscores <- read_csv("duperscore.csv")
+```
+
+
+```{r}
+library(readr)
+zoomscores <- read_csv("duperscore.csv")
+```
+
+```{r}
+
+
+zoomscores$day[zoomscores$day==1]<-0
+zoomscores$day[zoomscores$day==2]<-1
+zoomscores$day[zoomscores$day==3]<-2
+zoomscores$day[zoomscores$day==4]<-3
+zoomscores$day[zoomscores$day==5]<-4
+```
+
+
+# Single Predictor MLM
+
+```{r}
+mlmssoxzoom <-glmer(sso ~day+Zoom_Total_Mins+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxzoom)
+plot(mlmssoxzoom)
+confint(mlmssoxzoom)
+```
+
+na.action=na.exclude
+
+```{r}
+mlmssoxselfhide <-glmer(sso ~day+Self_View+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxselfhide)
+plot(mlmssoxselfhide)
+confint(mlmssoxselfhide)
+```
+
+```{r}
+mlmssoxselfmins <-glmer(sso ~day+Self_View_Mins+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxselfmins)
+plot(mlmssoxselfmins)
+confint(mlmssoxselfmins)
+```
+
+```{r}
+mlmssoxselfdistraction <-glmer(sso ~day+Self_Distraction+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxselfdistraction)
+plot(mlmssoxselfdistraction)
+confint(mlmssoxselfdistraction)
+```
+
+# Multiple Predictors in MLM
+
+
+```{r}
+mlmssoxtsoxzoom <-glmer(sso ~day+Zoom_Total_Mins*tso_mean+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxtsoxzoom)
+plot(mlmssoxtsoxzoom)
+
+```
+
+```{r}
+mlmssoxtsoxselfhide <-glmer(sso ~day+Self_View*tso_mean+(1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxtsoxselfhide)
+plot(mlmssoxtsoxselfhide)
+#confint(mlmssoxtsoxselfmins
+```
+
+```{r}
+mlmssoxtsoxselfmins <-glmer(sso ~day+Self_View_Mins*tso_mean+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxtsoxselfmins)
+plot(mlmssoxtsoxselfmins)
+#confint(mlmssoxtsoxselfmins)
+```
+
+```{r}
+mlmssoxtsoxselfdistraction <-glmer(sso ~day+Self_Distraction*tso_mean+ (1 |partID), family=binomial, data = zoomscores) 
+summary(mlmssoxtsoxselfdistraction)
+plot(mlmssoxtsoxselfdistraction)
+
+```
+
+
+
+
+
+
+
+
