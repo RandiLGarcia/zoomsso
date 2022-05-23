@@ -73,6 +73,43 @@ library(lmerTest)
 r_refs("r-references.bib")
 ```
 
+Zoom --> SSO --> Authenticity --> well-being (cognition, well-being)
+
+# Introduction Outline 
+
+1) 
+- Problem 
+- Literature 
+  - Zoom Fatigue 
+  - Close paper on zoom and trait objectification 
+  
+- Gap we are filling
+  - 5-day daily diaries
+  - State self-objectification
+  
+2)
+- Computer mediated interaction and self-objectification
+  - Social media
+  - Video chat (e.g Skype)
+  
+- State Self-Objectification
+  - Authenticity
+  - Well-being and cognition
+  
+3)
+- Zoom and well-being
+  - Zoom fatigue 
+  - Cognitive fatigue
+  
+4)
+- Explaining reasons for the negative effects of Zoom
+  - Self-objectification
+  - Seeing yourself
+  - Authenticity
+  - Studies on self-verification; studies using mirror.
+
+
+
 Past studies have found that using Zoom can cause mental fatigue [@bailenson2021nonverbal]. Seeing oneself on Zoom has also been linked to appearance concerns [@pfund2020video].
 
 # Methods
