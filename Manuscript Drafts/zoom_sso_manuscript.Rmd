@@ -21,7 +21,7 @@ author:
       - "Writing - Original Draft Preparation"
       - "Formal Analysis"
       - "Writing - Review & Editing"
-  - name          : "Pamala Kramer"
+  - name          : "Pamela Kramer"
     affiliation   : "1"
     role:
       - "Formal Analysis"
