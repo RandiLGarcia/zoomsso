@@ -57,8 +57,23 @@ mask              : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
+header-includes:
+  - |
+    \makeatletter
+    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+      {-1em}%
+      {\normalfont\normalsize\bfseries\typesectitle}}
+    
+    \renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+      {-\z@\relax}%
+      {\normalfont\normalsize\bfseries\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+    \makeatother
 
+csl               : "`r system.file('rmd', 'apa7.csl', package = 'papaja')`"
 classoption       : "man"
+documentclass     : "apa7"
 output            : papaja::apa6_pdf
 ---
 
@@ -107,6 +122,37 @@ Zoom --> SSO --> Authenticity --> well-being (cognition, well-being)
   - Seeing yourself
   - Authenticity
   - Studies on self-verification; studies using mirror.
+
+------------------------------------------------------------------
+
+Teleworking and virtual meetings became the new reality for many individuals during the covid-19 lockdown. Although past research has shown video conferences as being positively correlated with higher productivity (Zornoza, Prieto, Martií & Peiroó, 1993 ), switching from in-person interactions in the workplace or academic environment to spending a significant part of the day in virtual meetings has been linked to what it been called Virtual Meeting fatigue —  also known as Zoom fatigue (citation; Fosslien & Duffy, 2020; Jiang, 2020). While Zoom fatigue can be defined as physical and mental exhaustion due to spending long hours exposed to this technology, Nadler (2020) points out that Zoom fatigue is more than just screen staring and argues that much of it is due to the visual complexities of interpersonal interactions. Additionally, Nadler (2020) also proposed the third skin concept, which explains how video conference members are “flattened” into a third skin composed of persons, background, and technology. Similarly, Bailenson (2021) discusses how the nonverbal overload that does not happen in an in-person meeting, such as excessive amounts of close-up eye gaze, cognitive load, increased self-evaluation from staring at a video of oneself, and constraints on physical mobility, could be a potential cause for fatigue and other psychological consequences such as negative self-evaluation and cognitive overload.
+
+Studies have found women to be more susceptible to zoom fatigue than men. (Ratan, Miller & Bailenson, J. N. 2022; Pfund GN, Hill PL, Harriger J, 2020; Shockley, K. M., Gabriel, A. S., Robertson, D., Rosen, C. C., Chawla, N., Ganster, M. L., & Ezerins, M. E. 2021). Ratan et al. (2022) study explain that facial dissatisfaction was found to be one of the reasons for higher zoom fatigue in women. Additionally, due to the possibility of being able to see oneself on screen, self-objectification was found to be another possible explanation of higher zoom fatigue, especially in women (Luo, Queiroz, Bailenson, Hancock, 2021; Pfund GN, Hill PL, Harriger J, 2020). In this study, we look into daily zoom use and how being distracted by one’s self-image through the self-view feature can increase the state of self-objectification in young women. Through a five-day daily diary, we investigate how zoom was related to authenticity and daily well-being. Moreover, this is the first study to explore trait self-objectification as a moderator of zoom usage and state self-objectification. 
+
+# Social Media and Self-Objectification
+
+While there is a lack of self-objectification and other video chat interactions, such as skype, self-objectification in magazines, television and social media is a vast researched topic that can help us understand computer-mediated interactions relationship with self-objectification. Frederick and Robberts (1997) presented the objectification theory and defined self-objectification as feeling more like a body or an object rather than a human being. Past research has found that time spent on social media usage (e.g., Instagram, Facebook, Snapchat) and the use of its features (e.g., filter, likes, comments) are positively correlated to body dissatisfaction, eating disorders, appearance comparison, and self-objectification ( Bell, B. T., Cassarly, J. A., & Dunbar, L. 2018; Fardouly et al., 2015; Garcia, Bingham, & Liu  2021; Hanna et al., 2017; Pfund, Hill, and Harriger, 2020). Even though time was a predictor of self-objectification on social media, the same did not apply to Zoom. For instance, Harriger & Pfund (2022) found that the more time men and women spent on Zoom, the more appearance satisfaction was reported. However, the amount of time one spent looking at oneself was associated with appearance comparison and self-objectification. Thus, we could argue that being able to see oneself during video conferences could lead to social comparison with one’s image throughout the day and negative self-attention, which could increase Zoom fatigue. 
+
+State self-objectification (SSO) is a context-dependent condition that is triggered depending on the situation, for example, seeing sexualized images on social media or getting catcalled on the street. Trait self-objectification (TSO) is the internalized self-objectification throughout the years. Additionally, someone high in TSO is more prone to SSO (Fredrickson & Roberts, 1997; Gay & Castano, 2010). There are numerous cognitive and psychological consequences of being objectified. Even though some studies have shown that men are also self-objectifiers (see Daniel, Bridges, & Martens, 2014), women have more damaging and long-lasting consequences (Jones & Griffiths, 2015). For instance, studies have found that participants who present higher objectification reported feeling less authentic and having lower levels of subjective well-being in both workplace and academic settings (Cheng et al., 2022; Rollero, 2016). 
+*add swimsuit study*
+
+
+Additionally, Pfund, Hill, Harriger (2020) while using self-objectification as a moderator, found that being able to see oneself during a video call can increase ones self-objectification.
+
+*use of the self-view feature has been linked to Being able to see oneself during meetings is also a door that leads to negative self-attention known as mirror anxiety.*
+
+# Zoom and well-being
+
+
+In the past years, researchers have been investigating the reasons that lead to zoom fatigue. For instance, Zoom meetings, differently from in-person, feature the possibility of looking at oneself during video calls through the feature known as “self-view”. Hence, because people are not used to viewing themselves when talking to others, the self-view feature can trigger thoughts and feelings that were not previously possible during in-person interactions and thus increasing fatigue (Fauville, G., Luo, M., Queiroz, A. C. M., Bailenson, J. N., & Hancock, J. 2021; Shockley, K. M., Gabriel, A. S., Robertson, D., Rosen, C. C., Chawla, N., Ganster, M. L., & Ezerins, M. E. 2021; Bailenson, J. N. 2021) ). 
+
+Ratan, Miller, and Bailenson (2022) explain how negative self-focused attention, known as mirror anxiety,  leads to facial dissatisfaction and consequently increases Zoom fatigue. 
+
+
+# Zoom negative effects 
+
+
+  For instance, Ratan, Miller, and Bailenson (2022), explains how negative self-focused attention, known as mirror anxiety,  leads to facial dissatisfaction and consequently increases Zoom fatigue. 
 
 
 
