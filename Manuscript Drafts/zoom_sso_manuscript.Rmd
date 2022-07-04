@@ -82,6 +82,7 @@ knitr::opts_chunk$set(include = FALSE)
 
 library(papaja)
 library(readr)
+library(mosaic)
 library(tidyverse)
 library(psych)
 library(nlme)
@@ -158,11 +159,45 @@ Past studies have found that using Zoom can cause mental fatigue [@bailenson2021
 
 # Methods
 
+```{r}
+zoom_clean <- read_csv("zoom_clean.csv")
+#names(zoom_clean)
+```
+
 ## Participants
+
+```{r}
+zoom_ind <- zoom_clean %>%
+  group_by(partID) %>%
+  summarise(n = n(),
+            Age = mean(Age),
+            Gender = mean(Gender),
+            Sexual_Orientation = mean(Sexual_Orientation),
+            Race  = mean(Race), 
+            Political = mean(Political),
+            Living_Situation = mean(Living_Situation),
+            Family = mean(Family),
+            Household_Size = mean(Household_Size),
+            Privacy = mean(Privacy))
+```
+
+```{r}
+favstats(~ n, data = zoom_ind)
+favstats(~ Age, data = zoom_ind)
+tally(~ Gender, data = zoom_ind)
+tally(~ Sexual_Orientation, data = zoom_ind, format = "percent")
+tally(~ Race, data = zoom_ind, format = "percent")
+```
+
+The sample was gathered at a Historically Women's College in the Northeast United states. To be included in the analyses participants needed to complete at least one daily diary measure. Of the 56 people who participated in the initial intake survey, 37 completed at least one daily diary measure and were included in the final sample. These 37 participants completed 172 total daily surveys with an average of 4.65 (SD = 0.89) surveys each (ranging from 1 to 5 surveys per person). 
+
+Participants in this final sample were a mean age of 21.57 (SD = 6.34) years old. Gender and sexual orientation were assessed with check-all-that-apply type questions. The majority of participants, 89.19% (n = 33), identified as women, 5.41% (n = 2) identified as non-binary, and another 5.41% (n = 2) identified as both women and non-binary. Sexual orientation was quite diverse (as is not unusual at a historically women's college) with 32.43% (n = 12) identifying as straight, 27.03% (n = 10) as Gay/Lesbian, 16.22% (n = 6) as bisexual, 10.81% (n = 4) preferred not to answer, and one participant (or 2.70%) identified with each of the following: Asexual, Pansexual, Straight/Asexual, Bisexual/Pansexual, and Asexual/Other. Participants were also asked to check-all-that-apply for race---59.46% (n = 22) identified as White, 8.11% (n = 3) as Black or African American, 5.41% (n = 2) as Latinx or Hispanic, 21.62% (n = 8) as Asian or Asian American, and two participants as multiracial (White/Asian or Asian American and Black or African American/Asian or Asian American).
 
 ## Measures
 
 ## Procedure
+
+Participants were recruited during the second to last week of classes in the Spring 2021 semester. Classes were all fully remote (on the Zoom video chat platform) at this time due to the ongoing COVID-19 pandemic.
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.
@@ -170,10 +205,6 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
-```{r}
-zoom_clean <- read_csv("zoom_clean.csv")
-#names(zoom_clean)
-```
 
 ## Zoom Use and State Self-Objectification
 
