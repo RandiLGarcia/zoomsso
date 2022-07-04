@@ -74,10 +74,12 @@ header-includes:
 csl               : "`r system.file('rmd', 'apa7.csl', package = 'papaja')`"
 classoption       : "man"
 documentclass     : "apa7"
-output            : papaja::apa6_pdf
+output            : papaja::apa6_word
 ---
 
 ```{r setup, include = FALSE}
+knitr::opts_chunk$set(include = FALSE)
+
 library(papaja)
 library(readr)
 library(tidyverse)
@@ -87,10 +89,6 @@ library(lme4)
 library(lmerTest)
 r_refs("r-references.bib")
 ```
-
-Zoom --> SSO --> Authenticity --> well-being (cognition, well-being)
-
-# Introduction Outline 
 
 1) 
 - Problem 
