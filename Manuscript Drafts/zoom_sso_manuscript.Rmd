@@ -91,17 +91,17 @@ library(lmerTest)
 r_refs("r-references.bib")
 ```
 
-Teleworking and virtual meetings became the new reality for many individuals during the covid-19 lockdown. From studying to working, Zoom quickly developed into the most used software for virtual meetings growing from 10 million daily meeting participants in 2019 to 350 million by December 2020 (Iqbal, 2020). Although past research has shown video conferences as being associated with higher productivity (Lantz, 2001), switching from in-person interactions in the workplace or academic environment to spending a significant portion of the day in virtual meetings has been linked to what it been called Virtual Meeting fatigue — also known as Zoom fatigue (Fosslien & Duffy, 2020; Jiang, 2020). While Zoom fatigue can be defined as physical and mental exhaustion caused by prolonged exposure to this tool (Niedi, 2021), Nadler (2020) points out that Zoom fatigue is more than just screen staring and argues that much of it is due to the visual complexities of interpersonal interactions. Unlike in-person interaction, Zoom allows one to see themselves through the "self-view" feature that mirrors one's image on the screen, which raises appearance-related concerns such as appearance comparison and objectification. For instance, Pfund, Hill, and Harringer's (2020) study with 438 women who were asked about video chatting behaviors, appearance satisfaction, and self-objectification, found self-objectification – meaning feeling more like a body or an object rather than a human being (Fredrickon & Roberts, 1997) – as being a moderator between total hours of video chatting and appearance satisfaction.
+Teleworking and virtual meetings became the new reality for many individuals during the covid-19 lockdown. From studying to working, Zoom quickly developed into the most used software for virtual meetings growing from 10 million daily meeting participants in 2019 to 350 million by December 2020 (Iqbal, 2020). Although past research has shown video conferences as being associated with higher productivity (Lantz, 2001), switching from in-person interactions in the workplace or academic environment to spending a significant portion of the day in virtual meetings has been linked to what it been called Virtual Meeting fatigue --- also known as Zoom fatigue (Fosslien & Duffy, 2020; Jiang, 2020). While Zoom fatigue can be defined as physical and mental exhaustion caused by prolonged exposure to this tool (Niedi, 2021), Nadler (2020) points out that Zoom fatigue is more than just screen staring and argues that much of it is due to the visual complexities of interpersonal interactions. Unlike in-person interaction, Zoom allows one to see themselves through the "self-view" feature that mirrors one's image on the screen, which raises appearance-related concerns such as appearance comparison and objectification. For instance, Pfund, Hill, and Harringer's (2020) study with 438 women who were asked about video chatting behaviors, appearance satisfaction, and self-objectification, found self-objectification -- meaning feeling more like a body or an object rather than a human being (Fredrickon & Roberts, 1997) -- as being a moderator between total hours of video chatting and appearance satisfaction.
 
 Additionally, Ratan, Miller, and Bailenson's (2022) study suggests that being able to see oneself on the screen increases Zoom fatigue by 14.9 percent more for women compared to men due to facial dissatisfaction. Thus, the present study aims to connect both ideas. While previous studies have mainly addressed how Zoom use can lead to fatigue and the use of the self-view feature relationship with self-objectification separately, this study looks into daily zoom usage and how being distracted by one's self-image through the self-view feature can increase the state of self-objectification in young women and its effect in well-being. Through a five-day diary, we investigate how Zoom usage and self-objectification are related to authenticity, daily well-being, and daily mental fatigue. Moreover, this is the first study to examine trait self-objectification (TSO) as a moderator of zoom usage and state self-objectification.
 
 ## Self-objectification and well-being
 
-While there is a lack of research on self-objectification and other video chat interactions, such as Skype, self-objectification in magazines, television, and social media has been extensively studied and can help us understand the relationship between self-objectification and computer-mediated interactions. Time spent on social media (e.g., Instagram, Facebook, Snapchat) and its features (e.g., filter, likes, comments) are positively associated with body dissatisfaction, eating disorders, appearance comparison, and self-objectification, according to prior research ( Bell, B. T., Cassarly, J. A., & Dunbar, L. 2018; Fardouly et al., 2015; Garcia, Bingham, & Liu 2021; Hanna et al., 2017; Pfund, Hill, and Harriger, 2020). Even though time on social media was a predictor of self-objectification, there is scant evidence that time on Zoom is associated with self-objectification. For example, Harriger and Pfund (2022) observed that the more time men and women spend on Zoom, the greater their appearance satisfaction, a closely related construct. In contrast, the amount of time spent looking at oneself was connected with appearance comparisons and self-objectification. Additionally,  Harriger and Pfund (2022) found that video chatting appearance comparison was associated with an increase in the use of "touch up my appearance," a tool similar to social media filters. Furthermore, studies have shown a correlation between social media use and increased self-objectification due to the highly objectifying photos and predetermined beauty standards (Fardouly et al., 2015; Harper & Tiggemann, 2008).
+While there is a lack of research on self-objectification and other video chat interactions, such as Skype, self-objectification in magazines, television, and social media has been extensively studied and can help us understand the relationship between self-objectification and computer-mediated interactions. Time spent on social media (e.g., Instagram, Facebook, Snapchat) and its features (e.g., filter, likes, comments) are positively associated with body dissatisfaction, eating disorders, appearance comparison, and self-objectification, according to prior research ( Bell, B. T., Cassarly, J. A., & Dunbar, L. 2018; Fardouly et al., 2015; Garcia, Bingham, & Liu 2021; Hanna et al., 2017; Pfund, Hill, and Harriger, 2020). Even though time on social media was a predictor of self-objectification, there is scant evidence that time on Zoom is associated with self-objectification. For example, Harriger and Pfund (2022) observed that the more time men and women spend on Zoom, the greater their appearance satisfaction, a closely related construct. In contrast, the amount of time spent looking at oneself was connected with appearance comparisons and self-objectification. Additionally, Harriger and Pfund (2022) found that video chatting appearance comparison was associated with an increase in the use of "touch up my appearance," a tool similar to social media filters. Furthermore, studies have shown a correlation between social media use and increased self-objectification due to the highly objectifying photos and predetermined beauty standards (Fardouly et al., 2015; Harper & Tiggemann, 2008).
 
 State self-objectification (SSO) is a context-dependent condition triggered by situations such as viewing sexualized photos on social media or receiving catcalls in public. In contrast to state self-objectification, trait self-objectification (TSO) is the gradual internalization of self-objectification. Likewise, those with a high TSO are more likely to exhibit SSO when confronted with an objectifying setting (Fredrickson & Roberts, 1997; Gay & Castano, 2010). Objectification has several cognitive and psychological repercussions. Even though a number of studies have demonstrated that males are also self-objectifiers (see Daniel, Bridges, & Martens, 2014), self-objectification has more detrimental and long-lasting effects on women (Jones & Griffiths, 2015). For instance, Fredrickon et al. (1998) conducted two experiments in which SSO was manipulated and examined the psychological and cognitive results of self-objectification. In the first study, 75 college women were randomly allocated to wear either swimwear or a sweater, followed by a two-part body shame assessment. The findings revealed that those who wore swimsuits had a higher TSO and displayed more body shame and restricted food behaviors. In the second trial, forty men and forty-two women wore either swimwear or a sweater and completed assessments measuring body shame, cognitive - a brief math test - and behavioral consequences of self-objectification. A body-centered sense of self, or a state of self-objectification, was found in both men and women who tried the swimwear. However, women felt more anger and disgust with their bodies, whilst men were more casual and felt "silly" when wearing the bodywear. In addition, women in the swimsuit condition fared significantly worse on the math test than women in the sweater condition, whereas men's performance was unaffected in both conditions.
 
-In addition to psychological and cognitive effects, researchers have perceived self-objectification to also impact authenticity. Cheng et al. (2022) conducted five research with 834 participants to determine whether objectification affects authenticity and subjective well-being — how individuals perceive and assess their lives — and its implications. Objectification at work and in academic settings was associated with decreased authenticity and subjective well-being, and the mere act of picturing an objectifying situation made participants feel less authentic. Similarly, Rollero (2016) indicated that self-objectification resulting — from media standards internalization — influences people's perceptions of authenticity in social relationships.
+In addition to psychological and cognitive effects, researchers have perceived self-objectification to also impact authenticity. Cheng et al. (2022) conducted five research with 834 participants to determine whether objectification affects authenticity and subjective well-being --- how individuals perceive and assess their lives --- and its implications. Objectification at work and in academic settings was associated with decreased authenticity and subjective well-being, and the mere act of picturing an objectifying situation made participants feel less authentic. Similarly, Rollero (2016) indicated that self-objectification resulting --- from media standards internalization --- influences people's perceptions of authenticity in social relationships.
 
 ## Zoom fatigue and well-being
 
@@ -114,10 +114,12 @@ Finally, Bailenson (2021) discusses how nonverbal overload that does not occur i
 Zoom became an important tool for work, school, and healthcare during the covid lockdown. (CITATION). However, the tool most used in the past years also reflects adverse effects on its users that must be addressed. A common reason among scholars for Zoom fatigue and other negative consequences is the ability to see oneself. According to Bailenson (2021), "Zoom users are seeing reflections of themselves at a frequency and duration that hasn't been seen before in the history of media and likely the history of people." Seeing oneself during a meeting or conversation is out of the ordinary, and this behavior can trigger psychological effects known as self-awareness. According to Duval and Wicklund (1972), One can either focus on themselves or the events occurring around them simultaneously. Thus, self-focus makes the individual the "object" of evaluation. The individual is then reminded of their object status, which enhances self-awareness and may lead to a decline in self-esteem (Geller & Shaver, 1975). Additionally, prolonged self-awareness can lead to negative self-evaluation and negative affect such as anxiety and depression, an effect known as mirror anxiety (Bailenson, 2021; Fauville et al., 2021).
 
 In extending this concept to Zoom, one could claim that the self-view function is analogous to a mirror, which, according to the theory, will stimulate self-awareness. Pikes et al. surveyed 335 (85.1% of whom were women) adults about their video usage behaviors during video calls and discovered that one-third of the participants showed appearance concern while on a video call and expressed interest in beauty treatments and aesthetic procedures. The research also showed that this behavior was associated with self-focused attention. Nonetheless, societal pre-establish appearance expectations are strongly reinforced in women (Prentice & Carranza 2002), which could explain previous research showing women have more Zoom fatigue than men (Ratan, Miller & Bailenson, 2022).
- 
+
 Self-awareness and self-objectification are two distinct theories that explain how a situation can lead someone to feel like an object. Both might help us comprehend the negative effects of Zoom. While the earlier will trigger in situations where someone can see their own reflection, the latter will trigger when one is induced to an objectification state which could be by being exposed to an objectifying image or by seeing one's reflection. Using the self-view feature can lead to higher self-objectification, which triggers anxiety, shame, and, as self-awareness, increased awareness of internal bodily states.
 
 ## Current Study
+
+
 
 # Methods
 
@@ -151,7 +153,7 @@ tally(~ Sexual_Orientation, data = zoom_ind, format = "percent")
 tally(~ Race, data = zoom_ind, format = "percent")
 ```
 
-The sample was gathered at a Historically Women's College in the Northeast United states. To be included in the analyses participants needed to complete at least one daily diary measure. Of the 56 people who completed the initial intake survey, 42 indicated interest in the daily diary portion of the study, and 37 completed at least one daily diary measure and were thus included in the final sample. These 37 participants completed 172 total daily surveys with an average of 4.65 ($SD =$ 0.89) surveys each (ranging from 1 to 5 surveys per person). 
+The sample was gathered at a Historically Women's College in the Northeast United states. To be included in the analyses participants needed to complete at least one daily diary measure. Of the 56 people who completed the initial intake survey, 42 indicated interest in the daily diary portion of the study, and 37 completed at least one daily diary measure and were thus included in the final sample. These 37 participants completed 172 total daily surveys with an average of 4.65 ($SD =$ 0.89) surveys each (ranging from 1 to 5 surveys per person).
 
 Participants in this final sample were a mean age of 21.57 ($SD =$ 6.34) years old. Gender and sexual orientation were assessed with check-all-that-apply type questions. The majority of participants, 89.19% ($n =$ 33), identified as women, 5.41% ($n =$ 2) identified as non-binary, and another 5.41% ($n =$ 2) identified as both women and non-binary. Sexual orientation was quite diverse (as is not unusual at a historically women's college) with 32.43% ($n =$ 12) identifying as straight, 27.03% ($n =$ 10) as Gay/Lesbian, 16.22% ($n =$ 6) as bisexual, 10.81% ($n =$ 4) preferred not to answer, and one participant (or 2.70%) identified with each of the following: Asexual, Pansexual, Straight/Asexual, Bisexual/Pansexual, and Asexual/Other. Participants were also asked to check-all-that-apply for race---59.46% ($n =$ 22) identified as White, 8.11% ($n =$ 3) as Black or African American, 5.41% ($n =$ 2) as Latinx or Hispanic, 21.62% ($n =$ 8) as Asian or Asian American, and two participants as multiracial (White/Asian or Asian American and Black or African American/Asian or Asian American).
 
@@ -165,53 +167,63 @@ Zoom usage was assessed with two short-answer questions, *"How many days, on ave
 
 #### General Hide Self-View Use
 
-We assessed general use the other hide self-view feature in Zoom with the single question *"When using Zoom, do you use the 'hide self-view' feature?"* (1 = *Always* to 5 = *Never*). This item was reverse coded to reflect greater use of the hide self-view feature.  
+We assessed general use the other hide self-view feature in Zoom with the single question *"When using Zoom, do you use the 'hide self-view' feature?"* (1 = *Always* to 5 = *Never*). This item was reverse coded to reflect greater use of the hide self-view feature.
 
 #### General Own Image Distraction
 
-A single item also assessed the extent to which participants were generally distracted by their own image while use Zoom: *"When using Zoom, to what extent do you feel distracted by your own image?"* (1 = *A great deal* to 5 = *None at all*). This item was reversed to reflect greater distraction. 
+A single item also assessed the extent to which participants were generally distracted by their own image while use Zoom: *"When using Zoom, to what extent do you feel distracted by your own image?"* (1 = *A great deal* to 5 = *None at all*). This item was reversed to reflect greater distraction.
 
 #### Trait Self-Objectification (TSO)
 
-TSO was measured with the Self-Objectification Questionnaire [@noll1998mediational]. This measure consists of a rank ordering task where participants rank 10 attributes with 1 as the attribute that has the greatest impact on their physical self-concept and 10 as the attribute that has the least impact on their physical self-concept. An average of the non-visual attributes (physical coordination, health, strength, energy level, and physical fitness level) minus an average of the visual attributes (weight, sex appeal, physical attractiveness, firm/sculpted muscles, and measurements) was computed as the participants TSO score. 
+TSO was measured with the Self-Objectification Questionnaire [@noll1998mediational]. This measure consists of a rank ordering task where participants rank 10 attributes with 1 as the attribute that has the greatest impact on their physical self-concept and 10 as the attribute that has the least impact on their physical self-concept. An average of the non-visual attributes (physical coordination, health, strength, energy level, and physical fitness level) minus an average of the visual attributes (weight, sex appeal, physical attractiveness, firm/sculpted muscles, and measurements) was computed as the participants TSO score.
 
-As alternative measures of TSO, the surveillance subscale of the Objectified Body Consciousness Scale [OBCS-surveillance\; @mckinley1996objectified] and the Social Physique Anxiety [SPA\; @hart1989tie] scales were also administered. An example item on the OBCS-surveillance scale is *"During the day, I think about how I look many times."* OBCS-surveillance was reliable, $\alpha$ = 0.83. An example item from the SPA scale is *"Unattractive features of my physique/figure make me nervous in certain social settings,"* and this measure was also reliable, $\alpha$ = 0.91. 
+As alternative measures of TSO, the surveillance subscale of the Objectified Body Consciousness Scale [OBCS-surveillance; @mckinley1996objectified] and the Social Physique Anxiety [SPA; @hart1989tie] scales were also administered. An example item on the OBCS-surveillance scale is *"During the day, I think about how I look many times."* OBCS-surveillance was reliable, $\alpha$ = 0.83. An example item from the SPA scale is *"Unattractive features of my physique/figure make me nervous in certain social settings,"* and this measure was also reliable, $\alpha$ = 0.91.
 
 ### Dialy Diary Survey
 
 #### State Self-Objectification
-daily_SSO, daily_SSO_binary, 
+
+daily_SSO, daily_SSO_binary,
 
 #### Zoom Use
-Zoom_Total_Mins, 
+
+Zoom_Total_Mins,
 
 #### Hide Self View Use
-Hide_Self_View_Today, 
+
+Hide_Self_View_Today,
 
 #### Own Image Distraction
+
 Self_Distraction_Today,
 
 #### Cognitive Fatigue
-stroop_fatigue, 
+
+stroop_fatigue,
 
 #### Explicit Mental Fatigue
+
 Mental_Fatigue_Daily,
 
 #### Zoom Interaction Authenticity
-authenticity, 
+
+authenticity,
 
 #### Zoom Interaction Quality
+
 interact_qual,
 
 #### Daily Well-Being
+
 How_Today,
 
 #### Daily State Self-Esteem
+
 SES_daily
 
 ## Procedure
 
-Participants were recruited during the second to last week of classes in the Spring 2021 semester. Classes were all fully remote (on the Zoom video chat platform) at this time due to the ongoing COVID-19 pandemic. Professors across campus were asked to post a recruitment message for their students that contained a link to an initial survey. Participants could then opt to share their email addresses for follow-up instructions to participate in the daily diary portion of the study which was conducted over the last five days of the spring semester. Consent was given only before they begun the initial survey. Participants were compensated \$5 for completion of the initial survey, \$2 per day for each of the daily diary surveys completed, and given a \$5 bonus if they completed all 5 daily dairies. The link to the daily diary survey was sent to participants each night via email distributions in Qualtrics at 8pm. Reminder emails were sent the next morning at 8am to those who had not yet completed the survey. **CHECK: Only data from daily surveys that were completed by 12pm the following day, when thank you emails were sent, were included in analyses.**  
+Participants were recruited during the second to last week of classes in the Spring 2021 semester. Classes were all fully remote (on the Zoom video chat platform) at this time due to the ongoing COVID-19 pandemic. Professors across campus were asked to post a recruitment message for their students that contained a link to an initial survey. Participants could then opt to share their email addresses for follow-up instructions to participate in the daily diary portion of the study which was conducted over the last five days of the spring semester. Consent was given only before they begun the initial survey. Participants were compensated \$5 for completion of the initial survey, \$2 per day for each of the daily diary surveys completed, and given a \$5 bonus if they completed all 5 daily dairies. The link to the daily diary survey was sent to participants each night via email distributions in Qualtrics at 8pm. Reminder emails were sent the next morning at 8am to those who had not yet completed the survey. **CHECK: Only data from daily surveys that were completed by 12pm the following day, when thank you emails were sent, were included in analyses.**
 
 # Results
 
@@ -221,7 +233,7 @@ cite_r("r-references.bib")
 ## Note that nlme was used for glmer (I think), but we didn't end up using that package.
 ```
 
-We used R [Version 4.0.4\; @R-base] and the R-packages *tidyverse* [Version 1.3.0\; @R-tidyverse], *psych* [Version 2.1.3\; @R-psych], *lme4* [Version 1.1.26\; @R-lme4], and *lmerTest* [Version 3.1.3\; @R-lmerTest] were used for all our data cleaning and statistical analyses. The R-package *papaja* [Version 0.1.0.9999\; @R-papaja] was used for manuscript preparation. 
+We used R [Version 4.0.4; @R-base] and the R-packages *tidyverse* [Version 1.3.0; @R-tidyverse], *psych* [Version 2.1.3; @R-psych], *lme4* [Version 1.1.26; @R-lme4], and *lmerTest* [Version 3.1.3; @R-lmerTest] were used for all our data cleaning and statistical analyses. The R-package *papaja* [Version 0.1.0.9999; @R-papaja] was used for manuscript preparation.
 
 ## Zoom Use and State Self-Objectification
 
@@ -240,6 +252,8 @@ summary(glmer_ssozoom)
 #### TRYING LMER MODELS WITH daily_SSO even though assumptions of normality are violated
 mlm_mod_int <- lmer(daily_SSO ~ day + Zoom_Total_Mins + (1|partID), data = zoom_clean)
 summary(mlm_mod_int)
+
+### One of our most important models/results!!!!
 mlm_mod_int <- lmer(daily_SSO ~ day + Hide_Self_View_Today + Self_Distraction_Today + (1|partID), data = zoom_clean)
 summary(mlm_mod_int)
 plot(mlm_mod_int)
@@ -252,6 +266,7 @@ plot(mlm_mod_int)
 # Self_View_Today
 # Self_Distraction_Today
 
+## same results as model above but more complex/harder to explain in the paper
 glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today 
                        + (1|partID), 
                     family=binomial, 
@@ -260,9 +275,11 @@ glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Dist
 summary(glmer_ssohide)
 ```
 
-Interaction with TSO 
+Interaction with TSO
 
 ```{r}
+
+## No interaction
 glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today*OBCS_sur + Self_Distraction_Today*OBCS_sur 
                        + (1|partID), 
                     family=binomial, 
@@ -270,6 +287,7 @@ glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today*OBCS_sur + 
 
 summary(glmer_ssohide)
 
+## so we can control for trait self objectification (using OBCS) and our results are still sig.
 glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today + OBCS_sur
                        + (1|partID), 
                     family=binomial, 
@@ -279,6 +297,7 @@ summary(glmer_ssohide)
 ```
 
 ```{r}
+# this TSO measure is the Self-Objectification Questionnaire
 glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today*tso_mean + Self_Distraction_Today*tso_mean 
                        + (1|partID), 
                     family=binomial, 
@@ -295,6 +314,7 @@ summary(glmer_ssohide)
 ```
 
 ```{r}
+# SPA is social physique anxiety
 #does not converge with BOTH interactions in the model
 glmer_ssohide <- glmer(daily_SSO_binary ~ day + Hide_Self_View_Today + Self_Distraction_Today*SPA
                        + (1|partID), 
@@ -319,7 +339,7 @@ corr.test(select(zoom_clean, daily_SSO, daily_SSO_binary, stroop_fatigue, How_To
                  Mental_Fatigue_Daily, authenticity, interact_qual, SES_daily))$r
 ```
 
-State Self-Objectification to authenticity and interaction quality. 
+State Self-Objectification to authenticity and interaction quality.
 
 ```{r}
 mlm_mod_int <- lmer(authenticity ~ daily_SSO + day
@@ -355,8 +375,8 @@ mlm_mod_int <- lmer(SES_daily ~ interact_qual + daily_SSO + day + (1|partID), da
 summary(mlm_mod_int)
 ```
 
-
 # Discussion
+
 
 
 \newpage
