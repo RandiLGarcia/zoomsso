@@ -395,6 +395,23 @@ mlm_mod_int <- lmer(SES_daily ~ interact_qual + daily_SSO + day + (1|partID), da
 summary(mlm_mod_int)
 ```
 
+## Important Results to Cover
+
+- Hiding Self View still leads to High SSO
+  -- Contrary to what other research has shown, which is that seeing yourself more leads to more self-objectification
+  -- Perhaps this question reminds participants about their appearance 
+
+- High Self Distraction leads to High SSO
+
+- More daily SSO leads to more mental fatigue 
+
+- (How today) Better interaction leads to better mood, better
+
+- More daily SSO leads to less self esteem
+
+
+
+
 # Discussion
 
 
